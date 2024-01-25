@@ -1,0 +1,74 @@
+<?php
+
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductLinkController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// useless routes
+// Just to demo sidebar dropdown links active states.
+Route::get('/buttons/text', function () {
+    return view('buttons-showcase.text');
+})->middleware(['auth'])->name('buttons.text');
+
+Route::get('/buttons/icon', function () {
+    return view('buttons-showcase.icon');
+})->middleware(['auth'])->name('buttons.icon');
+
+Route::get('/buttons/text-icon', function () {
+    return view('buttons-showcase.text-icon');
+})->middleware(['auth'])->name('buttons.text-icon');
+
+require __DIR__ . '/auth.php';
+
+
+Route::get('/form-repair', [TransactionController::class, 'formRepair'])->middleware(['auth', 'verified', 'permission:form-repair'])->name('form-repair');
+Route::post('/save-repair', [TransactionController::class, 'storeFormRepait'])->middleware(['auth', 'verified', 'permission:form-repair'])->name('save-repair');
+Route::get('/form-add-stock', [TransactionController::class, 'formAddStock'])->middleware(['auth', 'verified', 'permission:stock-storage'])->name('form-add-stock');
+Route::get('/form-add-stock-warehouse', [TransactionController::class, 'formAddStockWarehouse'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('form-add-stock-warehouse');
+
+Route::get('/form-modif', [TransactionController::class, 'formModif'])->middleware(['auth', 'verified', 'permission:form-modif'])->name('form-modif');
+Route::post('/save-modif', [TransactionController::class, 'storeFormModif'])->middleware(['auth', 'verified', 'permission:form-modif'])->name('save-modif');
+Route::get('/stock-storage', [ProductController::class, 'myIndex'])->middleware(['auth', 'verified', 'permission:stock-storage'])->name('stock-storage');
+Route::post('/save-stock-storage', [ProductController::class, 'saveStockStorage'])->middleware(['auth', 'verified', 'permission:stock-storage'])->name('save-stock-storage');
+
+Route::get('/warehouse-storage', [ProductController::class, 'index'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('warehouse-storage');
+
+Route::get('/transaction', [TransactionController::class, 'index'])->middleware(['auth', 'verified', 'permission:transaction'])->name('transaction');
+
+Route::get('/information', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified', 'permission:information'])->name('information');
+
+Route::get('/employee-list', [UserController::class, 'index'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list');
+Route::get('/employee-create', [UserController::class, 'create'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-create');
+Route::post('/employee-store', [UserController::class, 'store'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-store');
+Route::get('/employee-edit/{user}', [UserController::class, 'edit'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-edit');
+Route::patch('/employee-update/{user}', [UserController::class, 'update'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-update');
