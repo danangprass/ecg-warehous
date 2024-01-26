@@ -37,7 +37,8 @@
                             {{ $item->type == 'modif' ? 'Form Modif' : 'Form Repair' }}
                         </td>
 
-                        <td class="border border-yellow-500 px-2 py-6">
+                        <td class="text-center border border-yellow-500 px-2 py-6">
+
                             @switch($item->type)
                                 @case('modif')
                                     {{ 'Got Modif - ' . $item->link->amount }}
@@ -93,6 +94,6 @@
                 </tbody>
             </table>
 
-            <div class="py-4">{{ $data->links() }}</div>
+            {{-- <div class="py-4">{{ $data->links() }}</div> --}}
         </div>
     </x-app-layout>

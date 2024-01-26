@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Transaction;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreProductLinkRequest extends FormRequest
+class addStockStorage extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +22,15 @@ class StoreProductLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'link' => 'required|string',
-            'amount' => 'required|numeric|min:1'
+            'user_id' => 'required|exists:users,id',
+            'product.*.id' => 'required|exists:products,id',
+            'product.*.amount' => 'nullable|lte:product.*.available_amount',
         ];
     }
 
-    public function prepareForValidation() : void {
-        $this->merge([
-            'owner_id' => Auth::user()->id
-        ]);
-    }
+    // public function prepareForValidation() : void {
+    //     $this->merge([
+    //         'product.*.available_amount' => 
+    //     ]);
+    // }
 }

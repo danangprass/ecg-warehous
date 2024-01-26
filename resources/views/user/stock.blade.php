@@ -2,13 +2,11 @@
     <x-slot name="header">
         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <h2 class="text-xl font-semibold leading-tight">
-                {{ __('Stock Storage') }}
+                {{ __($name . "'s Stock") }}
             </h2>
-            @can('add-stock-storage')
-                <x-button href="{{ route('form-add-stock') }}" variant="purple" class="justify-center max-w-xs gap-2">
-                    <span>Add Stock</span>
-                </x-button>
-            @endcan
+            <x-button href="{{ route('form-add-stock') }}" variant="purple" class="justify-center max-w-xs gap-2">
+                <span>Add Stock</span>
+            </x-button>
         </div>
     </x-slot>
 
@@ -27,12 +25,12 @@
                 @forelse ($data as $item)
                     <tr>
                         <td class="text-center border border-yellow-500 px-2 py-6 capitalize">
-                            {{ $item->type . ' ' . $item->name }}
+                            {{ $item->product->name }}
                         </td>
                         {{-- <td class="text-center border border-yellow-500 px-2 py-6">{{ $item->price }}</td> --}}
                         <td class="text-center border border-yellow-500 px-2 py-6">
                             {{-- {{ $item->myTransactions->sum('amount') }} --}}
-                            {{ $item->mine->sum('amount') }}
+                            {{ $item->amount }}
                         </td>
                         {{-- <td class="text-center border border-yellow-500 px-2 py-6">Action</td> --}}
                     </tr>

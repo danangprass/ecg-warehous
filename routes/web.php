@@ -60,15 +60,18 @@ Route::get('/stock-storage', [ProductController::class, 'myIndex'])->middleware(
 Route::post('/save-stock-storage', [ProductController::class, 'saveStockStorage'])->middleware(['auth', 'verified', 'permission:stock-storage'])->name('save-stock-storage');
 
 Route::get('/warehouse-storage', [ProductController::class, 'index'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('warehouse-storage');
+Route::post('/save-warehouse-storage', [ProductController::class, 'saveWarehouseStorage'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('save-warehouse-storage');
 
 Route::get('/transaction', [TransactionController::class, 'index'])->middleware(['auth', 'verified', 'permission:transaction'])->name('transaction');
 
-Route::get('/information', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'permission:information'])->name('information');
+Route::get('/information', [UserController::class, 'information'])->middleware(['auth', 'verified', 'permission:information'])->name('information');
 
 Route::get('/employee-list', [UserController::class, 'index'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list');
 Route::get('/employee-create', [UserController::class, 'create'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-create');
 Route::post('/employee-store', [UserController::class, 'store'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-store');
 Route::get('/employee-edit/{user}', [UserController::class, 'edit'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-edit');
+Route::get('/employee-stock/{user}', [UserController::class, 'stock'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-stock');
+Route::get('/employee-transaction/{user}', [UserController::class, 'transaction'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-transaction');
 Route::patch('/employee-update/{user}', [UserController::class, 'update'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-update');
+Route::get('/employee-list-reimburse/{user}/{amount}', [TransactionController::class, 'reimburse'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list-reimburse');
+Route::get('/employee-list-bonus/{user}/{amount}', [TransactionController::class, 'fee'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list-bonus');

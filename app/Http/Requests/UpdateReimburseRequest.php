@@ -3,16 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreProductLinkRequest extends FormRequest
+class UpdateReimburseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,14 +22,7 @@ class StoreProductLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'link' => 'required|string',
-            'amount' => 'required|numeric|min:1'
+            //
         ];
-    }
-
-    public function prepareForValidation() : void {
-        $this->merge([
-            'owner_id' => Auth::user()->id
-        ]);
     }
 }

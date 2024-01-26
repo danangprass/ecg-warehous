@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Transaction;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,9 +16,10 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->foreignId('owner_id')->constrained('users');
-            $table->foreignId('product_link_id')->constrained('product_links');
-            // $table->string('link');
-            $table->enum('type', ['repair', 'modif']);
+            $table->foreignId('product_link_id')->nullable()->constrained('product_links');
+            $table->enum('type', Transaction::TYPE);
+            $table->bigInteger('reimbursement')->nullable();
+            $table->bigInteger('bonus')->nullable();
             $table->timestamps();
         });
     }

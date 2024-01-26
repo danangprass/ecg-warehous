@@ -21,10 +21,14 @@ class UserSeeder extends Seeder
             'form-repair',
             'form-modif',
             'stock-storage',
+            'add-stock-storage',
             'warehouse-storage',
+            'add-warehouse-storage',
             'transaction',
             'information',
             'employee-list',
+            'employee-add',
+            'employee-edit',
         ];
 
         foreach ($permissions as $permission) {
@@ -38,8 +42,8 @@ class UserSeeder extends Seeder
             'superadmin',
             'boss',
             'spv',
-            'employee',
             'trainee',
+            'employee',
         ];
 
         foreach ($roles as $role) {
@@ -85,7 +89,8 @@ class UserSeeder extends Seeder
 
         foreach ($roles as $role) {
             if ($role == 'employee') {
-                $users = User::doesntHave('roles')->inRandomOrder()->limit(rand(1, 3))->get();
+                // $users = User::doesntHave('roles')->inRandomOrder()->limit(rand(1, 3))->get();
+                $users = User::doesntHave('roles')->inRandomOrder()->get();
                 foreach ($users as $user) {
                     $user->assignRole($role);
                 }

@@ -70,6 +70,21 @@
                     </x-form.input-with-icon-wrapper>
                 </div>
 
+                <!-- Bank Account -->
+                <div class="space-y-2 py-2">
+                    <x-form.label for="role" :value="__('Bank Account')" />
+
+                    <x-form.input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-currency-dollar aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+
+                        <x-form.input withicon id="bank_account" class="block w-full" type="text"
+                            name="bank_account" :value="$user->bank_account ?? old('bank_account')" placeholder="{{ __('Bank Account') }}" required
+                            autofocus />
+                    </x-form.input-with-icon-wrapper>
+                </div>
+
                 <!-- confirm role -->
                 <div class="space-y-2 py-2">
                     <x-form.label for="role" :value="__('Role')" />

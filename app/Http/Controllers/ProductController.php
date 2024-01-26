@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\Transaction\addStockStorage;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -15,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = Product::paginate();
+        $data = Product::paginate(10);
         return view('warehouse-storage', compact('data'));
     }
 
@@ -24,7 +27,7 @@ class ProductController extends Controller
      */
     public function myIndex()
     {
-        $data = Product::whereRelation('pivot', 'user_id', Auth::user()->id)->orderBy('name')->paginate();
+        $data = Product::whereRelation('pivot', 'user_id', Auth::user()->id)->orderBy('name')->paginate(10);
         return view('stock-storage', compact('data'));
     }
 
@@ -77,8 +80,24 @@ class ProductController extends Controller
     }
 
 
-    public function saveStockStorage(Request $request)
+    public function saveStockStorage(addStockStorage $request)
     {
-        dd($request->all());
+        DB::transaction(function () use ($request) {
+            $user = User::where('id', $request->user_id)->first();
+            foreach ($request->product as $product) {
+                $user->pivot()->where('product_id', $product['id'])->increment('amount', (int)$product['amount']);
+            }
+        });
+        return redirect()->route('stock-storage')->with(['success' => "Stock saved"]);
+    }
+    public function saveWarehouseStorage(Request $request)
+    {
+        // dd($request->all());
+        DB::transaction(function () use ($request) {
+            foreach ($request->product as $product) {
+                Product::where('id', $product['id'])->increment('amount', (int)$product['amount']);
+            }
+        });
+        return redirect()->route('stock-storage')->with(['success' => "Stock saved"]);
     }
 }

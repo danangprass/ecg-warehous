@@ -6,6 +6,7 @@ use App\Http\Requests\User\Create;
 use App\Http\Requests\User\Edit;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -72,5 +73,34 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function stock(User $user)
+    {
+        $name = $user->name;
+        $data = $user->pivot()->paginate();
+        return view('user.stock', compact('data', 'name'));
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function transaction(User $user)
+    {
+        $data = $user->transactions;
+        return view('user.Transaction', compact('data'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function information()
+    {
+        $user = Auth::user();
+        return view('user.information', compact('user'));
     }
 }

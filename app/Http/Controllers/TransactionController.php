@@ -22,7 +22,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $data = Transaction::orderBy('date', 'desc')->paginate();
+        $data = Auth::user()->transactions()->orderBy('date', 'desc')->paginate();
         return view('transaction', compact('data'));
     }
 
@@ -80,7 +80,7 @@ class TransactionController extends Controller
     public function formRepair()
     {
         $links = Auth::user()->links()->pluck('link', 'id');
-        $products = Product::all();
+        $products = Product::orderBy('id')->get();
         return view('form-repair', compact('links', 'products'));
     }
     /**
@@ -93,7 +93,7 @@ class TransactionController extends Controller
 
     public function formAddStock()
     {
-        $employees = User::whereRelation('roles', 'name', 'employee')->get();
+        $employees = User::all();
         $products = Product::orderBy('id')->get();
         return view('form-add-stock', compact('employees', 'products'));
     }
@@ -132,12 +132,37 @@ class TransactionController extends Controller
                 'type' => 'repair',
             ])->details()->createMany($transactionDetails);
             foreach ($transactionDetails as $detail) {
-                Auth::user()->pivot()->where('product_id', $detail['product_id'])->first()->decrement('amount', $detail['amount']);
+                Auth::user()->pivot()->where('product_id', $detail['product_id'])->decrement('amount', $detail['amount']);
                 Product::where('id', $detail['product_id'])->decrement('amount', $detail['amount']);
-                
             }
         });
 
         return redirect()->route('form-repair')->with(['success' => "Link saved"]);
+    }
+
+    public function reimburse(User $user, int $amount)
+    {
+        DB::transaction(function () use ($user, $amount) {
+            Transaction::create([
+                'date' => Carbon::now()->format('Y-m-d'),
+                'owner_id' => $user->id,
+                'type' => 'reimburse',
+                'reimbursement' => $amount * -1,
+            ]);
+        });
+        return redirect()->route('employee-list')->with(['success' => "Reimbursement Success"]);
+    }
+
+    public function fee(User $user, int $amount)
+    {
+        DB::transaction(function () use ($user, $amount) {
+            Transaction::create([
+                'date' => Carbon::now()->format('Y-m-d'),
+                'owner_id' => $user->id,
+                'type' => 'bonus',
+                'bonus' => $amount * -1,
+            ]);
+        });
+        return redirect()->route('employee-list')->with(['success' => "Bonus Payment Success"]);
     }
 }

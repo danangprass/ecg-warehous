@@ -9,43 +9,57 @@
 
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
 
-        <div class="py-4">
-            <div class="grid grid-cols-5 gap-4 text-sm font-semibold leading-6 bg-stripes-fuchsia rounded-lg py-4">
-                @foreach ($products->where('type', '!=', 'extra') as $item)
-                    <div class="">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="py-2 capitalize">{{ $item->type . ' ' . $item->name }}</div>
-                            <div class="">
-                                <x-form.input withicon id="amount" class="block w-full" type="text" name="amount"
-                                    :value="old('amount')" placeholder="{{ __('amount') }}" required autofocus />
+        <form action="{{ route('save-warehouse-storage') }}" method="post">
+            @method('POST')
+            @csrf
+            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+            <div class="py-4">
+                <div class="grid grid-cols-5 gap-4 text-sm font-semibold leading-6 bg-stripes-fuchsia rounded-lg py-4">
+                    @foreach ($products->where('type', '!=', 'extra') as $item)
+                        <div class="">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="py-2 capitalize">{{ $item->name }}
+                                    <input type="hidden" name="product[{{ $item->id }}][id]"
+                                        value="{{ $item->id }}">
+                                </div>
+                                <div class="">
+                                    <x-form.input withicon id="amount" class="block w-full" type="number"
+                                        name="product[{{ $item->id }}][amount]" :value="old('amount')"
+                                        placeholder="0" autofocus />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
 
-            </div>
-            <hr>
-            <div class="grid grid-cols-5 gap-4 text-sm font-semibold leading-6 bg-stripes-fuchsia rounded-lg py-4">
-                @foreach ($products->where('type', 'extra') as $item)
-                    <div class="">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="py-2 capitalize">{{ $item->type . ' Part ' . $item->name }}</div>
-                            <div class="">
-                                <x-form.input withicon id="amount" class="block w-full" type="text" name="amount"
-                                    :value="old('amount')" placeholder="{{ __('amount') }}" required autofocus />
+                </div>
+                <hr>
+                <div class="grid grid-cols-5 gap-4 text-sm font-semibold leading-6 bg-stripes-fuchsia rounded-lg py-4">
+                    @foreach ($products->where('type', 'extra') as $item)
+                        <div class="">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="py-2 capitalize">{{ $item->name }}
+                                    <input type="hidden" name="product[{{ $item->id }}][id]"
+                                        value="{{ $item->id }}">
+                                </div>
+                                <div class="">
+                                    <x-form.input withicon id="amount" class="block w-full" type="number"
+                                        name="product[{{ $item->id }}][amount]" :value="old('amount')"
+                                        placeholder="0" autofocus />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
 
+                </div>
             </div>
-        </div>
-        <div class="flex items-center justify-center py-2 w-full">
-            <x-button class="gap-2 w-64">
-                <x-heroicon-o-inbox class="w-6 h-6" aria-hidden="true" />
-                <span>{{ __('Submit') }}</span>
-            </x-button>
-        </div>
+            <div class="flex items-center justify-center py-2 w-full">
+                <x-button class="gap-2 w-64">
+                    <x-heroicon-o-inbox class="w-6 h-6" aria-hidden="true" />
+                    <span>{{ __('Submit') }}</span>
+                </x-button>
+            </div>
+        </form>
+
     </div>
 
     </div>

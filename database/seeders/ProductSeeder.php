@@ -31,12 +31,15 @@ class ProductSeeder extends Seeder
         ];
 
         foreach (Product::TYPE as $type) {
-            # code...
             foreach ($products as $product) {
-                Product::factory()->create(['name' => $product, 'type' => $type]);
+                if ($type == 'extra') {
+                    Product::factory()->create(['name' => ucfirst($type . ' Part ' . $product), 'type' => $type]);
+                } else{
+                    Product::factory()->create(['name' => ucfirst($type . ' ' . $product), 'type' => $type]);
+                }
             }
         }
-       
+
         $users = User::whereRelation('roles', 'name', 'employee')->get();
         $allProducts = Product::all();
 
@@ -45,7 +48,7 @@ class ProductSeeder extends Seeder
                 $uhp = UserHasProduct::create([
                     'user_id' => $user->id,
                     'product_id' => $product->id,
-                    'amount' => rand(5,30)
+                    'amount' => rand(5, 30)
                 ]);
 
                 $product->increment('amount', $uhp->amount);

@@ -4,10 +4,12 @@
             <h2 class="text-xl font-semibold leading-tight">
                 {{ __('Warehouse Storage') }}
             </h2>
-            <x-button  href="{{ route('form-add-stock-warehouse') }}" variant="purple"
-                class="justify-center max-w-xs gap-2">
-                <span>Add Stock</span>
-            </x-button>
+            @can('add-warehouse-storage')
+                <x-button href="{{ route('form-add-stock-warehouse') }}" variant="purple"
+                    class="justify-center max-w-xs gap-2">
+                    <span>Add Stock</span>
+                </x-button>
+            @endcan
         </div>
     </x-slot>
 
@@ -24,12 +26,13 @@
             <tbody>
                 @forelse ($data as $item)
                     <tr>
-                        <td class="text-center border border-yellow-500 px-2 py-6 capitalize">{{ $item->type . ' ' . $item->name }}
+                        <td class="text-center border border-yellow-500 px-2 py-6 capitalize">
+                            {{ $item->type . ' ' . $item->name }}
                         </td>
                         {{-- <td class="text-center border border-yellow-500 px-2 py-6">{{ $item->price }}</td> --}}
                         <td class="text-center border border-yellow-500 px-2 py-6">
                             {{ $item->amount }}</td>
-                            {{-- {{ $item->properties->sum('amount') }}</td> --}}
+                        {{-- {{ $item->properties->sum('amount') }}</td> --}}
                         {{-- <td class="text-center border border-yellow-500 px-2 py-6">Action</td> --}}
                     </tr>
                 @empty

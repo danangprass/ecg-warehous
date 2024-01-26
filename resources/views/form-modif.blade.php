@@ -26,7 +26,7 @@
                         </x-slot>
 
                         <x-form.input withicon id="link" class="block w-full" type="text" name="link"
-                            :value="old('link')" placeholder="{{ __('link') }}" required autofocus />
+                            :value="old('link')" placeholder="{{ __('link') }}" autofocus />
                     </x-form.input-with-icon-wrapper>
                 </div>
 
@@ -39,8 +39,8 @@
                             <x-heroicon-o-cog aria-hidden="true" class="w-5 h-5" />
                         </x-slot>
 
-                        <x-form.input withicon id="amount" class="block w-full" type="text" name="amount"
-                            :value="old('amount')" placeholder="{{ __('amount') }}" required autofocus />
+                        <x-form.input withicon id="amount" class="block w-full" type="number" name="amount"
+                            :value="old('amount')" placeholder="{{ __('amount') }}" autofocus />
                     </x-form.input-with-icon-wrapper>
                 </div>
 
