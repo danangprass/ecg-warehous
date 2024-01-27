@@ -27,4 +27,16 @@ class FormRepair extends FormRequest
             'product.*.amount' => 'nullable|lte:product.*.available_amount',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'product.*.amount.lte' => 'amount cannot more than the available amount',
+        ];
+    }
 }

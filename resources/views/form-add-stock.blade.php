@@ -42,10 +42,10 @@
                         {{-- @dd($item->amount) --}}
                             <div class="">
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div class="py-2 capitalize">{{ $item->name}}
+                                    <div class="py-2 capitalize">{{ $item->name}} {{ $item->amount ?? 0 }}
                                         <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
                                         <input type="hidden" name="product[{{ $item->id }}][available_amount]"
-                                            value="{{ $item->amount }}">
+                                            value="{{ $item->amount ?? 0 }}">
                                     </div>
                                     <div class="">
                                         <x-form.input withicon id="amount" class="block w-full" type="number"
@@ -62,10 +62,10 @@
                         @foreach ($products->where('type', '==', 'body') as $item)
                             <div class="">
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div class="py-2 capitalize">{{ $item->name}}
+                                    <div class="py-2 capitalize">{{ $item->name}} {{ $item->amount ?? 0 }}
                                         <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
                                         <input type="hidden" name="product[{{ $item->id }}][available_amount]"
-                                            value="{{ $item->amount }}">
+                                            value="{{ $item->amount ?? 0 }}">
                                     </div>
                                     <div class="">
                                         <x-form.input withicon id="amount" class="block w-full" type="number"
@@ -83,10 +83,10 @@
                         @foreach ($products->where('type', 'extra') as $item)
                             <div class="">
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div class="py-2 capitalize">{{ $item->name}}
+                                    <div class="py-2 capitalize">{{ $item->name}} {{ $item->amount ?? 0 }}
                                         <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
                                         <input type="hidden" name="product[{{ $item->id }}][available_amount]"
-                                            value="{{ $item->amount }}">
+                                            value="{{ $item->amount ?? 0 }}">
                                     </div>
                                     <div class="">
                                         <x-form.input withicon id="amount" class="block w-full" type="number"
