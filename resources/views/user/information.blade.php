@@ -9,8 +9,20 @@
     </x-slot>
 
     @php
-        [$firstName, $lastName] = explode(' ', $user->name, 2);
+        $nameWords = explode(' ', $user->name);
+
+        // Check the number of words in the name
+        if (count($nameWords) == 1) {
+            // If only one word, take it as the first name
+            $firstName = $nameWords[0];
+            $lastName = ''; // No last name in this case
+        } else {
+            // If more than one word, take the first and last names
+            $firstName = $nameWords[0];
+            $lastName = end($nameWords);
+        }
     @endphp
+
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
         {{-- <div class="flex items-center lg:w-3/5 mx-auto sm:flex-row flex-col"> --}}
         <div class="items-center object-center justify-center align-middle">
