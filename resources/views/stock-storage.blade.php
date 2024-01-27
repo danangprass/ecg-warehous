@@ -18,9 +18,7 @@
             <thead>
                 <tr>
                     <th class="text-center border border-yellow-500 px-2 py-6 bg-yellow-500 text-white">Name</th>
-                    {{-- <th class="text-center border border-yellow-500 px-2 py-6 bg-yellow-500 text-white">Price</th> --}}
                     <th class="text-center border border-yellow-500 px-2 py-6 bg-yellow-500 text-white">Stock</th>
-                    {{-- <th class="text-center border border-yellow-500 px-2 py-6 bg-yellow-500 text-white">Action</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -29,12 +27,10 @@
                         <td class="text-center border border-yellow-500 px-2 py-6 capitalize">
                             {{ $item->type . ' ' . $item->name }}
                         </td>
-                        {{-- <td class="text-center border border-yellow-500 px-2 py-6">{{ $item->price }}</td> --}}
                         <td class="text-center border border-yellow-500 px-2 py-6">
-                            {{-- {{ $item->myTransactions->sum('amount') }} --}}
-                            {{ $item->mine->sum('amount') }}
+                            {{-- {{ $item->mine->sum('amount') }} --}}
+                            {{ $item->mine->amount}}
                         </td>
-                        {{-- <td class="text-center border border-yellow-500 px-2 py-6">Action</td> --}}
                     </tr>
                 @empty
                     <tr>

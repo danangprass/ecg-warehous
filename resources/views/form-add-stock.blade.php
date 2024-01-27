@@ -16,17 +16,6 @@
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                 <div class="space-y-2 py-2 w-[50%]">
                     <Label> Select Employee</Label>
-                    {{-- <x-form.label for="link" :value="__('Link')" /> --}}
-
-                    {{-- <x-form.input-with-icon-wrapper>
-                    <x-slot name="icon">
-                        <x-heroicon-o-link aria-hidden="true" class="w-5 h-5" />
-                    </x-slot>
-
-                    <x-form.input withicon id="link" class="block w-full" type="text" name="link"
-                        :value="old('link')" placeholder="{{ __('link') }}" required autofocus />
-                </x-form.input-with-icon-wrapper> --}}
-
                     <select
                         class="block px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm w-96 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
                         name="user_id">
@@ -49,20 +38,39 @@
                 <div class="py-4">
                     <div
                         class="grid grid-cols-5 gap-4 text-sm font-semibold leading-6 bg-stripes-fuchsia rounded-lg py-4">
-                        @foreach ($products->where('type', '!=', 'extra') as $item)
+                        @foreach ($products->where('type', '==', 'engine') as $item)
+                        {{-- @dd($item->amount) --}}
                             <div class="">
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div class="py-2 capitalize">{{$item->name }}
-                                        <input type="hidden" name="product[{{ $item->id }}][id]"
-                                            value="{{ $item->id }}">
+                                    <div class="py-2 capitalize">{{ $item->name}}
+                                        <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
+                                        <input type="hidden" name="product[{{ $item->id }}][available_amount]"
+                                            value="{{ $item->amount }}">
                                     </div>
                                     <div class="">
                                         <x-form.input withicon id="amount" class="block w-full" type="number"
-                                            name="product[{{ $item->id }}][amount]" :value="old('amount')"
-                                            placeholder="0" autofocus />
-                                            <x-form.input withicon id="available_amount" class="block w-full" type="hidden"
-                                            name="product[{{ $item->id }}][available_amount]" :value=" $item->availableStock "
-                                            placeholder="{{ __('available_amount') }}" autofocus />
+                                            name="product[{{ $item->id }}][amount]" :value="old('amount')" placeholder="0"
+                                            autofocus />
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                    <div
+                        class="grid grid-cols-5 gap-4 text-sm font-semibold leading-6 bg-stripes-fuchsia rounded-lg py-4">
+                        @foreach ($products->where('type', '==', 'body') as $item)
+                            <div class="">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="py-2 capitalize">{{ $item->name}}
+                                        <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
+                                        <input type="hidden" name="product[{{ $item->id }}][available_amount]"
+                                            value="{{ $item->amount }}">
+                                    </div>
+                                    <div class="">
+                                        <x-form.input withicon id="amount" class="block w-full" type="number"
+                                            name="product[{{ $item->id }}][amount]" :value="old('amount')" placeholder="0"
+                                            autofocus />
                                     </div>
                                 </div>
                             </div>
@@ -75,17 +83,15 @@
                         @foreach ($products->where('type', 'extra') as $item)
                             <div class="">
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div class="py-2 capitalize">{{$item->name }}
-                                        <input type="hidden" name="product[{{ $item->id }}][id]"
-                                            value="{{ $item->id }}">
+                                    <div class="py-2 capitalize">{{ $item->name}}
+                                        <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
+                                        <input type="hidden" name="product[{{ $item->id }}][available_amount]"
+                                            value="{{ $item->amount }}">
                                     </div>
                                     <div class="">
                                         <x-form.input withicon id="amount" class="block w-full" type="number"
-                                            name="product[{{ $item->id }}][amount]" :value="old('amount')"
-                                            placeholder="0" autofocus />
-                                        <x-form.input withicon id="available_amount" class="block w-full" type="hidden"
-                                            name="product[{{ $item->id }}][available_amount]" :value=" $item->availableStock "
-                                            placeholder="{{ __('available_amount') }}" autofocus />
+                                            name="product[{{ $item->id }}][amount]" :value="old('amount')" placeholder="0"
+                                            autofocus />
                                     </div>
                                 </div>
                             </div>

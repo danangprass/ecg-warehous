@@ -133,7 +133,7 @@ class TransactionController extends Controller
             ])->details()->createMany($transactionDetails);
             foreach ($transactionDetails as $detail) {
                 Auth::user()->pivot()->where('product_id', $detail['product_id'])->decrement('amount', $detail['amount']);
-                Product::where('id', $detail['product_id'])->decrement('amount', $detail['amount']);
+                // Product::where('id', $detail['product_id'])->decrement('amount', $detail['amount']);
             }
         });
 

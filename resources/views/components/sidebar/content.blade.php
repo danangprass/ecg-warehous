@@ -17,7 +17,7 @@
         </x-sidebar.link>
     @endcan
     @can('stock-storage')
-        <x-sidebar.link title="Stock Storage" {{-- href="#" --}} href="{{ route('stock-storage') }}" :isActive="request()->routeIs('stock-storage')">
+        <x-sidebar.link title="Stock Storage" {{-- href="#" --}} href="{{ route('stock-storage') }}" :isActive="request()->routeIs('stock-storage')||request()->routeIs('form-add-stock')">
             <x-slot name="icon">
                 {{-- <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" /> --}}
                 <x-heroicon-o-cube aria-hidden="true" class="w-5 h-5" />
@@ -27,7 +27,7 @@
     @endcan
     @can('warehouse-storage')
         <x-sidebar.link title="Warehouse Storage" {{-- href="#" --}} href="{{ route('warehouse-storage') }}"
-            :isActive="request()->routeIs('warehouse-storage')">
+            :isActive="request()->routeIs('warehouse-storage') || request()->routeIs('form-add-stock-warehouse')">
             <x-slot name="icon">
                 {{-- <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" /> --}}
                 <x-heroicon-o-archive aria-hidden="true" class="w-5 h-5" />
@@ -52,7 +52,7 @@
         </x-sidebar.link>
     @endcan
     @can('employee-list')
-        <x-sidebar.link title="Employee List" {{-- href="#" --}} href="{{ route('employee-list') }}" :isActive="request()->routeIs('employee-list')">
+        <x-sidebar.link title="Employee List" {{-- href="#" --}} href="{{ route('employee-list') }}" :isActive="request()->routeIs('employee-list') || request()->routeIs('employee-edit') || request()->routeIs('employee-create')">
             <x-slot name="icon">
                 {{-- <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" /> --}}
                 <x-heroicon-o-user-group aria-hidden="true" class="w-5 h-5" />

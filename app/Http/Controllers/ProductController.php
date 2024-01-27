@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function myIndex()
     {
-        $data = Product::whereRelation('pivot', 'user_id', Auth::user()->id)->orderBy('name')->paginate(10);
+        $data = Product::whereRelation('pivot', 'user_id', Auth::user()->id)->orderBy('id')->paginate(10);
         return view('stock-storage', compact('data'));
     }
 
@@ -86,13 +86,13 @@ class ProductController extends Controller
             $user = User::where('id', $request->user_id)->first();
             foreach ($request->product as $product) {
                 $user->pivot()->where('product_id', $product['id'])->increment('amount', (int)$product['amount']);
+                Product::where('id', $product['id'])->decrement('amount', (int)$product['amount']);
             }
         });
         return redirect()->route('stock-storage')->with(['success' => "Stock saved"]);
     }
     public function saveWarehouseStorage(Request $request)
     {
-        // dd($request->all());
         DB::transaction(function () use ($request) {
             foreach ($request->product as $product) {
                 Product::where('id', $product['id'])->increment('amount', (int)$product['amount']);

@@ -22,7 +22,9 @@ class FormRepair extends FormRequest
     public function rules(): array
     {
         return [
-            'link' => 'required'
+            'link' => 'required',
+            'product.*.id' => 'required|exists:products,id',
+            'product.*.amount' => 'nullable|lte:product.*.available_amount',
         ];
     }
 }

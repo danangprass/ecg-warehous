@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
@@ -45,8 +46,8 @@ class Product extends Model
         return $this->hasMany(UserHasProduct::class)->where('product_id', $this->id);
     }
 
-    public function mine() : HasMany {
-        return $this->hasMany(UserHasProduct::class)->where('product_id', $this->id)->where('user_id', Auth::user()->id);
+    public function mine() : HasOne {
+        return $this->hasOne(UserHasProduct::class)->where('product_id', $this->id)->where('user_id', Auth::user()->id);
     }
 
     protected function availableStock(): Attribute{
