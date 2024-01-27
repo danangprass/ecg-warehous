@@ -22,7 +22,7 @@
                             <x-heroicon-o-link aria-hidden="true" class="w-5 h-5" />
                         </x-slot>
 
-                        <x-form.input id="link" class="block w-full" type="text" name="link"
+                        <x-form.input withicon id="link" class="block w-full" type="text" name="link"
                             :value="old('link')" placeholder="{{ __('link') }}" autofocus />
                     </x-form.input-with-icon-wrapper>
                 </div>
