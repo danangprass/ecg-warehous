@@ -50,7 +50,25 @@
                 <div class="py-4">
                     <div
                         class="grid grid-cols-5 gap-4 text-sm font-semibold leading-6 bg-stripes-fuchsia rounded-lg py-4">
-                        @foreach ($products->where('type', '!=', 'extra') as $item)
+                        @foreach ($products->where('type', '==', 'engine') as $item)
+                            <div class="">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="py-2 capitalize">{{ $item->name}}
+                                        <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
+                                    </div>
+                                    <div class="">
+                                        <x-form.input withicon id="amount" class="block w-full" type="number"
+                                            name="product[{{ $item->id }}][amount]" :value="old('amount')" placeholder="0"
+                                            autofocus />
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                    <div
+                        class="grid grid-cols-5 gap-4 text-sm font-semibold leading-6 bg-stripes-fuchsia rounded-lg py-4">
+                        @foreach ($products->where('type', '==', 'body') as $item)
                             <div class="">
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="py-2 capitalize">{{ $item->name}}

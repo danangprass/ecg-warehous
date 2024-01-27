@@ -124,7 +124,7 @@ class TransactionController extends Controller
                     'link' => $request->link,
                     'amount' => $item['amount'] ?? 0,
                 ];
-            })->toArray();
+            })->filter(fn ($item) => $item['amount'] > 0)->toArray();
 
             Transaction::create([
                 'date' => Carbon::now()->format('Y-m-d'),

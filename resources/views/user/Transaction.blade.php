@@ -74,7 +74,8 @@
                                 @break
 
                                 @case('repair')
-                                    <a class="hover:text-blue-500 hover:underline" href="{{ $item->details[0]->link }}">
+                                    <a class="hover:text-blue-500 hover:underline" target="_blank"
+                                        href="{{ $item->details[0]->link }}">
                                         Click Here
                                     </a>
                                 @break

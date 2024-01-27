@@ -76,7 +76,7 @@
                         </span>
                     </label>
 
-                    @if (Route::has('password.request'))
+                    @if (!Route::has('password.request'))
                         <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
@@ -91,7 +91,7 @@
                     </x-button>
                 </div>
 
-                @if (Route::has('register'))
+                @if (!Route::has('register'))
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                         {{ __('Don’t have an account?') }}
                         <a href="{{ route('register') }}" class="text-blue-500 hover:underline">

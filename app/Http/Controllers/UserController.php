@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\Create;
 use App\Http\Requests\User\Edit;
+use App\Models\Product;
 use App\Models\User;
+use App\Models\UserHasProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -35,6 +37,16 @@ class UserController extends Controller
     public function store(Create $request)
     {
         $user = User::create($request->all());
+        $allProducts = Product::all();
+        foreach ($allProducts as $product) {
+            UserHasProduct::create([
+                'user_id' => $user->id,
+                'product_id' => $product->id,
+                'amount' => 0
+            ]);
+
+            $product->save();
+        }
         $user->assignRole($request->role);
         return redirect()->route('employee-list')->with(['success' => "User created"]);
     }
@@ -61,7 +73,6 @@ class UserController extends Controller
      */
     public function update(Edit $request, User $user)
     {
-        // dd($request->all());
         $user->update($request->all());
         $user->syncRoles($request->role);
         return redirect()->route('employee-list')->with(['success' => "User created"]);

@@ -44,8 +44,8 @@ class Transaction extends Model
         return Attribute::make(
             get: fn () =>
             match ($this->type) {
-                'repair' => $this->details->sum('total') * 0.1 +  $this->bonus,
-                'modif' => $this->link->amount * 0.1 + $this->bonus,
+                'repair' => $this->details->sum('total') +  $this->bonus,
+                'modif' => $this->link->amount + $this->bonus,
                 default => $this->bonus,
             }
         );

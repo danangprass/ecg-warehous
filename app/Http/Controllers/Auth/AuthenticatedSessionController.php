@@ -32,7 +32,8 @@ class AuthenticatedSessionController extends Controller
         Auth::user()->last_login = Carbon::now();
         Auth::user()->save();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->route('form-repair');
+        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

@@ -1,10 +1,5 @@
 <x-perfect-scrollbar as="nav" aria-label="main" class="flex flex-col flex-1 gap-4 px-3">
 
-    <x-sidebar.link title="Dashboard" href="{{ route('dashboard') }}" :isActive="request()->routeIs('dashboard')">
-        <x-slot name="icon">
-            <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
-        </x-slot>
-    </x-sidebar.link>
     @can('form-repair')
         <x-sidebar.link title="Form Repair" {{-- href="#" --}} href="{{ route('form-repair') }}" :isActive="request()->routeIs('form-repair')">
             <x-slot name="icon">
@@ -43,7 +38,7 @@
     @can('transaction')
         <x-sidebar.link title="Transaction" {{-- href="#" --}} href="{{ route('transaction') }}" :isActive="request()->routeIs('transaction')">
             <x-slot name="icon">
-                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+                <x-heroicon-o-document-text aria-hidden="true" class="w-5 h-5" />
                 {{-- <x-heroicon-o-banknotes aria-hidden="true" class="w-5 h-5" /> --}}
             </x-slot>
         </x-sidebar.link>
@@ -51,7 +46,8 @@
     @can('information')
         <x-sidebar.link title="Information" {{-- href="#" --}} href="{{ route('information') }}" :isActive="request()->routeIs('information')">
             <x-slot name="icon">
-                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+                <x-heroicon-o-user aria-hidden="true" class="w-5 h-5" />
+                
             </x-slot>
         </x-sidebar.link>
     @endcan

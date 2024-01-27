@@ -18,9 +18,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TransactionController::class, 'formRepair'])->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
