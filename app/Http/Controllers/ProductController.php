@@ -98,6 +98,6 @@ class ProductController extends Controller
                 Product::where('id', $product['id'])->increment('amount', (int)$product['amount']);
             }
         });
-        return redirect()->route('stock-storage')->with(['success' => "Stock saved"]);
+        return redirect()->route('warehouse-storage')->with(['success' => "Stock saved"]);
     }
 }
