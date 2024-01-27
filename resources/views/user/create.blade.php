@@ -79,7 +79,7 @@
                         </x-slot>
 
                         <x-form.input withicon id="bank_account" class="block w-full" type="text" name="bank_account"
-                            :value="old('bank_account')" placeholder="{{ __('Bank Account') }}" required autofocus />
+                            :value="old('bank_account')" placeholder="{{ __('Bank Account') }}" autofocus />
                     </x-form.input-with-icon-wrapper>
                 </div>
                 
