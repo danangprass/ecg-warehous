@@ -23,7 +23,7 @@
                                     <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
                                 </div>
                                 <div class="">
-                                    <x-form.input withicon id="amount" class="block w-full" type="number"
+                                    <x-form.input id="amount" class="block w-full" type="number"
                                         name="product[{{ $item->id }}][amount]" :value="old('amount')" placeholder="0"
                                         autofocus />
                                 </div>
@@ -41,7 +41,7 @@
                                     <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
                                 </div>
                                 <div class="">
-                                    <x-form.input withicon id="amount" class="block w-full" type="number"
+                                    <x-form.input id="amount" class="block w-full" type="number"
                                         name="product[{{ $item->id }}][amount]" :value="old('amount')" placeholder="0"
                                         autofocus />
                                 </div>
@@ -60,7 +60,7 @@
                                     <input type="hidden" name="product[{{ $item->id }}][id]" value="{{ $item->id }}">
                                 </div>
                                 <div class="">
-                                    <x-form.input withicon id="amount" class="block w-full" type="number"
+                                    <x-form.input id="amount" class="block w-full" type="number"
                                         name="product[{{ $item->id }}][amount]" :value="old('amount')" placeholder="0"
                                         autofocus />
                                 </div>

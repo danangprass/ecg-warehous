@@ -22,7 +22,7 @@
                             <x-heroicon-o-link aria-hidden="true" class="w-5 h-5" />
                         </x-slot>
 
-                        <x-form.input withicon id="link" class="block w-full" type="text" name="link"
+                        <x-form.input id="link" class="block w-full" type="text" name="link"
                             :value="old('link')" placeholder="{{ __('link') }}" autofocus />
                     </x-form.input-with-icon-wrapper>
                 </div>
@@ -40,7 +40,7 @@
                                             value="{{ $item->mine->amount ?? 0 }}">
                                     </div>
                                     <div class="">
-                                        <x-form.input withicon id="amount" class="block w-full" type="number"
+                                        <x-form.input id="amount" class="block w-full" type="number"
                                             name="product[{{ $item->id }}][amount]" :value="old('amount')"
                                             placeholder="0" autofocus />
                                     </div>
@@ -62,7 +62,7 @@
                                     </div>
 
                                     <div class="">
-                                        <x-form.input withicon id="amount" class="block w-full" type="number"
+                                        <x-form.input id="amount" class="block w-full" type="number"
                                             name="product[{{ $item->id }}][amount]" :value="old('amount')"
                                             placeholder="0" autofocus />
                                     </div>
@@ -84,7 +84,7 @@
                                             value="{{ $item->mine->amount ?? 0 }}">
                                     </div>
                                     <div class="">
-                                        <x-form.input withicon id="amount" class="block w-full" type="number"
+                                        <x-form.input id="amount" class="block w-full" type="number"
                                             name="product[{{ $item->id }}][amount]" :value="old('amount')"
                                             placeholder="0" autofocus />
                                     </div>
