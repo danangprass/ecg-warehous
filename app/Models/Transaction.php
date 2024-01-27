@@ -45,7 +45,7 @@ class Transaction extends Model
             get: fn () =>
             match ($this->type) {
                 'repair' => $this->details->sum('total') +  $this->bonus,
-                'modif' => ($this->link->amount *0.086)+ $this->bonus,
+                'modif' => ($this->link->amount * 0.086) + $this->bonus,
                 default => $this->bonus,
             }
         );

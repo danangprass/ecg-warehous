@@ -140,7 +140,7 @@ class TransactionController extends Controller
         return redirect()->route('form-repair')->with(['success' => "Link saved"]);
     }
 
-    public function reimburse(User $user, int $amount)
+    public function reimburse(User $user, float|int $amount)
     {
         DB::transaction(function () use ($user, $amount) {
             Transaction::create([
@@ -153,7 +153,7 @@ class TransactionController extends Controller
         return redirect()->route('employee-list')->with(['success' => "Reimbursement Success"]);
     }
 
-    public function fee(User $user, int $amount)
+    public function fee(User $user, float|int $amount)
     {
         DB::transaction(function () use ($user, $amount) {
             Transaction::create([
