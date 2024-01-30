@@ -21,6 +21,15 @@ class UserController extends Controller
         $data = User::with('roles')->paginate();
         return view('user.index', compact('data'));
     }
+  
+    /**
+     * Display a listing of the resource.
+     */
+    public function apiIndex()
+    {
+        $data = User::with('roles')->paginate();
+        return response()->json($data);
+    }
 
     /**
      * Show the form for creating a new resource.

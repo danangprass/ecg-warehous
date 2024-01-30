@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Livewire\UserTable;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,8 @@ Route::get('/transaction', [TransactionController::class, 'index'])->middleware(
 
 Route::get('/information', [UserController::class, 'information'])->middleware(['auth', 'verified', 'permission:information'])->name('information');
 
-Route::get('/employee-list', [UserController::class, 'index'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list');
+Route::get('/employee-list', UserTable::class)->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list');
+// Route::get('/employee-list', [UserController::class, 'index'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list');
 Route::get('/employee-create', [UserController::class, 'create'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-create');
 Route::post('/employee-store', [UserController::class, 'store'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-store');
 Route::get('/employee-edit/{user}', [UserController::class, 'edit'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-edit');
