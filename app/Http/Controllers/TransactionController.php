@@ -22,7 +22,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $data = Auth::user()->transactions()->orderBy('date', 'desc')->paginate();
+        $data = Auth::user()->transactions()->orderBy('created_at', 'desc')->paginate();
         return view('transaction', compact('data'));
     }
 

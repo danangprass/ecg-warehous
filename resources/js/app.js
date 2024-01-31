@@ -1,6 +1,6 @@
 import './bootstrap'
 
-import Alpine from 'alpinejs'
+// import Alpine from 'alpinejs'
 import collapse from '@alpinejs/collapse'
 import PerfectScrollbar from 'perfect-scrollbar'
 
@@ -71,6 +71,6 @@ document.addEventListener('alpine:init', () => {
     })
 })
 
-Alpine.plugin(collapse)
+// Alpine.plugin(collapse)
 
-Alpine.start()
+// Alpine.start()

@@ -32,7 +32,7 @@
                             <td class="text-center border border-yellow-500 px-2 py-6 font-semibold">
                                 {{ $item->owner->name }}</td>
                         @endcan
-                        <td class="text-center border border-yellow-500 px-2 py-6">{{ $item->date }}</td>
+                        <td class="text-center border border-yellow-500 px-2 py-6">{{ $item->created_at }}</td>
                         <td class="text-center border border-yellow-500 px-2 py-6">
                             {{ $item->type == 'modif' ? 'Form Modif' : 'Form Repair' }}
                         </td>

@@ -111,7 +111,7 @@ class UserController extends Controller
      */
     public function transaction(User $user)
     {
-        $data = $user->transactions;
+        $data = $user->transactions()->orderBy('created_at', 'desc')->paginate();
         return view('user.Transaction', compact('data'));
     }
 
