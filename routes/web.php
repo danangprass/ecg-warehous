@@ -4,8 +4,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductLinkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Livewire\RolePermissionTable;
 use App\Livewire\UserTable;
 
 /*
@@ -75,3 +77,11 @@ Route::get('/employee-transaction/{user}', [UserController::class, 'transaction'
 Route::patch('/employee-update/{user}', [UserController::class, 'update'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-update');
 Route::get('/employee-list-reimburse/{user}/{amount}', [TransactionController::class, 'reimburse'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list-reimburse');
 Route::get('/employee-list-bonus/{user}/{amount}', [TransactionController::class, 'fee'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list-bonus');
+
+
+
+Route::get('/role-list', RolePermissionTable::class)->middleware(['auth', 'verified', 'permission:role-list'])->name('role-list');
+Route::get('/role-create', [RoleController::class, 'create'])->middleware(['auth', 'verified', 'permission:role-add'])->name('role-create');
+Route::post('/role-store', [RoleController::class, 'store'])->middleware(['auth', 'verified', 'permission:role-add'])->name('role-store');
+Route::get('/role-edit/{role}', [RoleController::class, 'edit'])->middleware(['auth', 'verified', 'permission:role-edit'])->name('role-edit');
+Route::patch('/role-update/{role}', [RoleController::class, 'update'])->middleware(['auth', 'verified', 'permission:role-edit'])->name('role-update');

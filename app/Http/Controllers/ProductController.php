@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = Product::paginate(10);
+        $data = Product::paginate(25);
         return view('warehouse-storage', compact('data'));
     }
 
@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function myIndex()
     {
-        $data = Product::whereRelation('pivot', 'user_id', Auth::user()->id)->orderBy('id')->paginate(10);
+        $data = Product::whereRelation('pivot', 'user_id', Auth::user()->id)->orderBy('id')->paginate(25);
         return view('stock-storage', compact('data'));
     }
 

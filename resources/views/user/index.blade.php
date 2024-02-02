@@ -1,7 +1,3 @@
-{{-- <div x-data="mainState" :class="{ dark: isDarkMode }" x-on:resize.window="handleWindowResize" x-cloak> --}}
-{{-- <x-app-layout> --}}
-{{-- @livewireScripts --}}
-
 <x-slot name="header">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <h2 class="text-xl font-semibold leading-tight">
@@ -142,6 +138,10 @@
                                 class="bg-yellow-500 p-1 w-8 h-8 mx-1 text-white rounded-md flex items-center justify-center">
                                 <x-heroicon-o-document-text aria-hidden="true" class="w-3 h-3" />
                             </a>
+                            <a href="#"
+                                class="bg-yellow-500 p-1 w-8 h-8 mx-1 text-white rounded-md flex items-center justify-center">
+                                <x-heroicon-o-trash aria-hidden="true" class="w-3 h-3" />
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -154,48 +154,4 @@
     </table>
 
     <div class="py-4">{{ $data->links() }}</div>
-
-    {{-- <table id="catTable" x-data="userData">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Role</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <template x-if="!users">
-                    <tr>
-                        <td colspan="4"><i>Loading...</i></td>
-                    </tr>
-                </template>
-                <template x-for="user in users">
-                    <tr>
-                        <td x-text="user.name"></td>
-                        <td>
-                            <template x-for="role in user.roles ">
-                                <span x-text="role.name"></span>
-                            </template>
-                        </td>
-
-                    </tr>
-                </template>
-            </tbody>
-        </table> --}}
 </div>
-{{-- </div> --}}
-
-{{-- <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('userData', () => ({
-                users: null,
-                async init() {
-                    let resp = await fetch(
-                        "{{ route('api.users.index') }}");
-                    let response = await resp.json();
-                    this.users = response.data
-                },
-            }))
-        });
-    </script> --}}
-{{-- </x-app-layout> --}}

@@ -60,6 +60,15 @@
             </x-slot>
         </x-sidebar.link>
     @endcan
+    @can('employee-list')
+        <x-sidebar.link title="Roles & Permissions" {{-- href="#" --}} href="{{ route('role-list') }}" :isActive="request()->routeIs('role-list') || request()->routeIs('role-edit') || request()->routeIs('role-create')">
+            <x-slot name="icon">
+                {{-- <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" /> --}}
+                <x-heroicon-o-user-group aria-hidden="true" class="w-5 h-5" />
+
+            </x-slot>
+        </x-sidebar.link>
+    @endcan
 
     {{-- <x-sidebar.dropdown
         title="Buttons"

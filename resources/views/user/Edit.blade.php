@@ -41,6 +41,20 @@
                     </x-form.input-with-icon-wrapper>
                 </div>
 
+                <!-- user name -->
+                <div class="space-y-2 py-2">
+                    <x-form.label for="phonenumber" :value="__('Phone Number')" />
+
+                    <x-form.input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-phone aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+
+                        <x-form.input withicon id="phonenumber" class="block w-full" type="text" name="phonenumber"
+                            :value="$user->phonenumber ?? old('phonenumber')" placeholder="{{ __('Phone Number') }}" required autofocus />
+                    </x-form.input-with-icon-wrapper>
+                </div>
+
                 <!-- password -->
                 <div class="space-y-2 py-2">
                     <x-form.label for="password" :value="__('Password')" />
