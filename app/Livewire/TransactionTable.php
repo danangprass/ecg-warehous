@@ -32,7 +32,14 @@ class TransactionTable extends Component
         $data = Auth::user()->transactions()
             ->where(function ($query) {
                 $query->where('created_at', 'like', '%' . $this->search . '%')
-                    ->orWhere('type', 'like', '%' . $this->search . '%');
+                    ->orWhere('type', 'like', '%' . $this->search . '%')
+                    ->orWhere('reimbursement', 'like', '%' . $this->search . '%')
+                    // ->orWhereHas('details', function ($query) {
+                    //     return $query->orWhereRelation('product', 'name', 'like', '%' . $this->search . '%');
+                    // })
+                    // ->orWhereRelation('details', 'product.name', 'like', '%' . $this->search . '%')
+                    ->orWhereRelation('link', 'amount', 'like', '%' . $this->search . '%')
+                    ->orWhere('bonus', 'like', '%' . $this->search . '%');
             })
             ->orderBy($this->sortBy, $this->sortOrder)
             ->paginate($this->length);

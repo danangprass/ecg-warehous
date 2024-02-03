@@ -48,19 +48,19 @@
                     wire:click="setSortBy('name')">
                     <span>Users</span>
                 </th>
-                <th class="text-center border border-yellow-500 px-1 py-3 bg-yellow-500 text-white w-32">Action</th>
+                <th class="text-center border border-yellow-500 px-1 py-3 bg-yellow-500 text-white">Action</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($data as $item)
                 <tr>
-                    <td class="text-center border border-yellow-500 px-1 py-3 capitalize w-56">
+                    <td class="text-center border border-yellow-500 px-1 py-3 capitalize">
                         {{ $item->name }}
                     </td>
-                    <td class="text-center border border-yellow-500 px-1 py-3 capitalize w-56">
+                    <td class="text-center border border-yellow-500 px-1 py-3 capitalize">
                         {{ implode(', ', $item->users->map(fn($q) => $q->name)->toArray()) }}
                     </td>
-                    <td class="text-center border border-yellow-500 p-1 capitalize">
+                    <td class="text-center border border-yellow-500 p-1 capitalize justify-center">
                         <div class="flex flex-row">
                             @can('role-edit')
                                 <a href="{{ route('role-edit', ['role' => $item->id]) }}" variant="purple"
