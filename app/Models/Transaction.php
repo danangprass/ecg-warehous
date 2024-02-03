@@ -59,10 +59,10 @@ class Transaction extends Model
         return Attribute::make(
             get: fn () =>
             match ($this->type) {
-                // 'repair' => $this->details->sum('total') - ($this->details->sum('total') * 0.15) +  ($this->reimbursement ?? 0),
                 'modif' => ($this->link->amount * 0.86) + ($this->reimbursement ?? 0),
                 default => ($this->reimbursement ?? 0),
             }
         );
     }
+
 }

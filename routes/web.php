@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Livewire\RolePermissionTable;
+use App\Livewire\TransactionTable;
 use App\Livewire\UserTable;
 
 /*
@@ -63,7 +64,8 @@ Route::post('/save-stock-storage', [ProductController::class, 'saveStockStorage'
 Route::get('/warehouse-storage', [ProductController::class, 'index'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('warehouse-storage');
 Route::post('/save-warehouse-storage', [ProductController::class, 'saveWarehouseStorage'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('save-warehouse-storage');
 
-Route::get('/transaction', [TransactionController::class, 'index'])->middleware(['auth', 'verified', 'permission:transaction'])->name('transaction');
+Route::get('/transaction', TransactionTable::class)->middleware(['auth', 'verified', 'permission:transaction'])->name('transaction');
+// Route::get('/transaction', [TransactionController::class, 'index'])->middleware(['auth', 'verified', 'permission:transaction'])->name('transaction');
 
 Route::get('/information', [UserController::class, 'information'])->middleware(['auth', 'verified', 'permission:information'])->name('information');
 
@@ -75,6 +77,7 @@ Route::get('/employee-edit/{user}', [UserController::class, 'edit'])->middleware
 Route::get('/employee-stock/{user}', [UserController::class, 'stock'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-stock');
 Route::get('/employee-transaction/{user}', [UserController::class, 'transaction'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-transaction');
 Route::patch('/employee-update/{user}', [UserController::class, 'update'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-update');
+Route::delete('/employee-delete/{user}', [UserController::class, 'destroy'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-delete');
 Route::get('/employee-list-reimburse/{user}/{amount}', [TransactionController::class, 'reimburse'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list-reimburse');
 Route::get('/employee-list-bonus/{user}/{amount}', [TransactionController::class, 'fee'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list-bonus');
 

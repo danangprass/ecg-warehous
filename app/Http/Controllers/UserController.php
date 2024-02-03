@@ -21,7 +21,7 @@ class UserController extends Controller
         $data = User::with('roles')->paginate();
         return view('user.index', compact('data'));
     }
-  
+
     /**
      * Display a listing of the resource.
      */
@@ -92,7 +92,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->pivot()->delete();
+        $user->delete();
+        return redirect()->route('employee-list')->with(['success' => "User deleted"]);
     }
 
     /**
