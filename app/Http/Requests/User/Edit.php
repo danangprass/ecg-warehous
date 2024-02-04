@@ -24,8 +24,8 @@ class Edit extends FormRequest
         return [
             'name' => 'required|string|min:4',
             'email' => 'required|unique:users,email,' . $this->user->id,
-            'password' => 'required|string|min:3',
-            'confirm-password' => 'required|string|min:3|same:password',
+            'password' => 'string|min:3',
+            'confirm-password' => 'string|min:3|same:password',
             'role' => 'required|exists:roles,name'
         ];
     }

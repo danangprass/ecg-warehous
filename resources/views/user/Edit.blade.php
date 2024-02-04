@@ -51,7 +51,7 @@
                         </x-slot>
 
                         <x-form.input withicon id="phonenumber" class="block w-full" type="text" name="phonenumber"
-                            :value="$user->phonenumber ?? old('phonenumber')" placeholder="{{ __('Phone Number') }}" required autofocus />
+                            :value="$user->phonenumber ?? old('phonenumber')" placeholder="{{ __('Phone Number') }}"  autofocus />
                     </x-form.input-with-icon-wrapper>
                 </div>
 
@@ -65,7 +65,7 @@
                         </x-slot>
 
                         <x-form.input withicon id="password" class="block w-full" type="password" name="password"
-                            :value="old('password')" placeholder="{{ __('password') }}" required autofocus />
+                            :value="old('password')" placeholder="{{ __('password') }}"  autofocus />
                     </x-form.input-with-icon-wrapper>
                 </div>
 
@@ -80,7 +80,7 @@
 
                         <x-form.input withicon id="confirm-password" class="block w-full" type="password"
                             name="confirm-password" :value="old('confirm-password')" placeholder="{{ __('Confirm Password') }}"
-                            required autofocus />
+                             autofocus />
                     </x-form.input-with-icon-wrapper>
                 </div>
 
