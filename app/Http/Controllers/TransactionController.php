@@ -102,6 +102,12 @@ class TransactionController extends Controller
         $products = Product::orderBy('id')->get();
         return view('form-add-stock-warehouse', compact('products'));
     }
+    
+    public function formEditStockWarehouse()
+    {
+        $products = Product::orderBy('id')->get();
+        return view('form-edit-stock-warehouse', compact('products'));
+    }
 
     public function storeFormModif(StoreProductLinkRequest $request)
     {

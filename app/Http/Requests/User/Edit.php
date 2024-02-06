@@ -24,9 +24,30 @@ class Edit extends FormRequest
         return [
             'name' => 'required|string|min:4',
             'email' => 'required|unique:users,email,' . $this->user->id,
-            'password' => 'string|min:3',
-            'confirm-password' => 'string|min:3|same:password',
+            // 'password' => 'string|min:3',
+            // 'confirm-password' => 'string|min:3|same:password',
             'role' => 'required|exists:roles,name'
         ];
+    }
+
+        
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        
+        $requestData = $this->all();
+
+        // Unset 'password' and 'confirm_password' if they are null
+        if (is_null($requestData['password'])) {
+            unset($requestData['password']);
+        }
+
+        if (is_null($requestData['confirm-password'])) {
+            unset($requestData['confirm-password']);
+        }
+
+        $this->replace($requestData);
     }
 }

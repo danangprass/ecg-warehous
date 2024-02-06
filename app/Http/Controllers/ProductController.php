@@ -100,4 +100,14 @@ class ProductController extends Controller
         });
         return redirect()->route('warehouse-storage')->with(['success' => "Stock saved"]);
     }
+
+    public function updateWarehouseStorage(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            foreach ($request->product as $product) {
+                Product::where('id', $product['id'])->update(['amount' => (int)$product['amount']]);
+            }
+        });
+        return redirect()->route('warehouse-storage')->with(['success' => "Stock saved"]);
+    }
 }

@@ -4,12 +4,20 @@
             <h2 class="text-xl font-semibold leading-tight">
                 {{ __('Warehouse Storage') }}
             </h2>
-            @can('add-warehouse-storage')
-                <x-button href="{{ route('form-add-stock-warehouse') }}" variant="purple"
-                    class="justify-center max-w-xs gap-2">
-                    <span>Add Stock</span>
-                </x-button>
-            @endcan
+            <div>
+                @can('add-warehouse-storage')
+                    <x-button href="{{ route('form-add-stock-warehouse') }}" variant="purple"
+                        class="justify-center max-w-xs gap-2">
+                        <span>Add Stock</span>
+                    </x-button>
+                @endcan
+                @can('edit-warehouse-storage')
+                    <x-button href="{{ route('form-edit-stock-warehouse') }}" variant="purple"
+                        class="justify-center max-w-xs gap-2">
+                        <span>Edit Stock</span>
+                    </x-button>
+                @endcan
+            </div>
         </div>
     </x-slot>
 
@@ -18,9 +26,7 @@
             <thead>
                 <tr>
                     <th class="text-center border border-yellow-500 px-2 py-6 bg-yellow-500 text-white">Name</th>
-                    {{-- <th class="text-center border border-yellow-500 px-2 py-6 bg-yellow-500 text-white">Price</th> --}}
                     <th class="text-center border border-yellow-500 px-2 py-6 bg-yellow-500 text-white">Stock</th>
-                    {{-- <th class="text-center border border-yellow-500 px-2 py-6 bg-yellow-500 text-white">Action</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -29,11 +35,8 @@
                         <td class="text-center border border-yellow-500 px-2 py-6 capitalize">
                             {{ $item->type . ' ' . $item->name }}
                         </td>
-                        {{-- <td class="text-center border border-yellow-500 px-2 py-6">{{ $item->price }}</td> --}}
                         <td class="text-center border border-yellow-500 px-2 py-6">
                             {{ $item->amount }}</td>
-                        {{-- {{ $item->properties->sum('amount') }}</td> --}}
-                        {{-- <td class="text-center border border-yellow-500 px-2 py-6">Action</td> --}}
                     </tr>
                 @empty
                     <tr>

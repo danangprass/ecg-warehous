@@ -55,6 +55,7 @@ Route::get('/form-repair', [TransactionController::class, 'formRepair'])->middle
 Route::post('/save-repair', [TransactionController::class, 'storeFormRepait'])->middleware(['auth', 'verified', 'permission:form-repair'])->name('save-repair');
 Route::get('/form-add-stock', [TransactionController::class, 'formAddStock'])->middleware(['auth', 'verified', 'permission:stock-storage'])->name('form-add-stock');
 Route::get('/form-add-stock-warehouse', [TransactionController::class, 'formAddStockWarehouse'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('form-add-stock-warehouse');
+Route::get('/form-edit-stock-warehouse', [TransactionController::class, 'formEditStockWarehouse'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('form-edit-stock-warehouse');
 
 Route::get('/form-modif', [TransactionController::class, 'formModif'])->middleware(['auth', 'verified', 'permission:form-modif'])->name('form-modif');
 Route::post('/save-modif', [TransactionController::class, 'storeFormModif'])->middleware(['auth', 'verified', 'permission:form-modif'])->name('save-modif');
@@ -63,6 +64,7 @@ Route::post('/save-stock-storage', [ProductController::class, 'saveStockStorage'
 
 Route::get('/warehouse-storage', [ProductController::class, 'index'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('warehouse-storage');
 Route::post('/save-warehouse-storage', [ProductController::class, 'saveWarehouseStorage'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('save-warehouse-storage');
+Route::put('/update-warehouse-storage', [ProductController::class, 'updateWarehouseStorage'])->middleware(['auth', 'verified', 'permission:warehouse-storage'])->name('update-warehouse-storage');
 
 Route::get('/transaction', TransactionTable::class)->middleware(['auth', 'verified', 'permission:transaction'])->name('transaction');
 // Route::get('/transaction', [TransactionController::class, 'index'])->middleware(['auth', 'verified', 'permission:transaction'])->name('transaction');
