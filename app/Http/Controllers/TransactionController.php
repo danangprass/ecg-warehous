@@ -93,7 +93,7 @@ class TransactionController extends Controller
 
     public function formAddStock()
     {
-        $employees = User::all();
+        $employees = User::orderBy('name')->get();
         $products = Product::orderBy('id')->get();
         return view('form-add-stock', compact('employees', 'products'));
     }
