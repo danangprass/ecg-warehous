@@ -138,7 +138,9 @@
                                 class="bg-yellow-500 p-1 w-8 h-8 mx-1 text-white rounded-md flex items-center justify-center">
                                 <x-heroicon-o-document-text aria-hidden="true" class="w-3 h-3" />
                             </a>
-                            <button @click="isOpen = true, selectedUser = {{ json_encode($item) }}"
+                            {{-- <button @click="isOpen = true, selectedUser = {{ json_encode($item) }}" --}}
+                            <button
+                                onclick="Livewire.dispatch('openModal', { component: 'delete-user', arguments: { user: {{ $item }} }})"
                                 class="p-1 w-8 h-8 mx-1 text-red-500 border border-red-500 hover:bg-red-400 hover:text-white transition-all rounded-md flex items-center justify-center">
                                 <x-heroicon-o-trash aria-hidden="true" class="w-3 h-3" />
                             </button>
@@ -189,33 +191,34 @@
                             <p>Are you sure want to delete <strong x-text="selectedUser.name"></strong> ?</p>
                             <div class="flex flex-row justify-end mt-7 gap-2">
                                 <button @click="isOpen = false"
-                                class="bg-yellow-500 p-2 rounded-md text-white mt-2 hover:bg-yellow-400 transition-all">Cancel</button>
-                                    <form x-show="isOpen" id="deleteForm" action="" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                    
-                                        <!-- Hidden input to include selectedUser.id -->
-                                        <input type="hidden" name="user" x-bind:value="selectedUser.id">
-                                    
-                                        <button @click="deleteUser(selectedUser.id)" type="button" class="bg-gray-200 p-2 rounded-md text-red-500 mt-2 hover:bg-gray-100 transition-all">Delete</button>
-                                    </form>
-                                    
-                                    <script>
-                                        function deleteUser(id) {
-                                            // Construct the URL string
-                                            const url = `{{ url('employee-delete') }}/${id}`;
-                                    
-                                            // Set the dynamic action URL
-                                            document.getElementById('deleteForm').action = url;
-                                    
-                                            // Submit the form using JavaScript
-                                            document.getElementById('deleteForm').submit();
-                                    
-                                            // Close the modal
-                                            isOpen = false;
-                                        }
-                                    </script>
-                                    
+                                    class="bg-yellow-500 p-2 rounded-md text-white mt-2 hover:bg-yellow-400 transition-all">Cancel</button>
+                                <form x-show="isOpen" id="deleteForm" action="" method="post">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <!-- Hidden input to include selectedUser.id -->
+                                    <input type="hidden" name="user" x-bind:value="selectedUser.id">
+
+                                    <button @click="deleteUser(selectedUser.id)" type="button"
+                                        class="bg-gray-200 p-2 rounded-md text-red-500 mt-2 hover:bg-gray-100 transition-all">Delete</button>
+                                </form>
+
+                                <script>
+                                    function deleteUser(id) {
+                                        // Construct the URL string
+                                        const url = `{{ url('employee-delete') }}/${id}`;
+
+                                        // Set the dynamic action URL
+                                        document.getElementById('deleteForm').action = url;
+
+                                        // Submit the form using JavaScript
+                                        document.getElementById('deleteForm').submit();
+
+                                        // Close the modal
+                                        isOpen = false;
+                                    }
+                                </script>
+
 
                             </div>
                         </div>
