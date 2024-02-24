@@ -17,3 +17,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+ecgexeco_db.sql
+view_query.sql

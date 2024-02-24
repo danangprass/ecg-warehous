@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Livewire\EmployeeTransaction;
 use App\Livewire\RolePermissionTable;
 use App\Livewire\TransactionTable;
 use App\Livewire\UserTable;
@@ -77,7 +78,8 @@ Route::get('/employee-create', [UserController::class, 'create'])->middleware(['
 Route::post('/employee-store', [UserController::class, 'store'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-store');
 Route::get('/employee-edit/{user}', [UserController::class, 'edit'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-edit');
 Route::get('/employee-stock/{user}', [UserController::class, 'stock'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-stock');
-Route::get('/employee-transaction/{user}', [UserController::class, 'transaction'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-transaction');
+// Route::get('/employee-transaction/{user}', [UserController::class, 'transaction'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-transaction');
+Route::get('/employee-transaction/{user}',EmployeeTransaction::class)->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-transaction');
 Route::patch('/employee-update/{user}', [UserController::class, 'update'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-update');
 Route::delete('/employee-delete/{user}', [UserController::class, 'destroy'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-delete');
 Route::get('/employee-list-reimburse/{user}/{amount}', [TransactionController::class, 'reimburse'])->middleware(['auth', 'verified', 'permission:employee-list'])->name('employee-list-reimburse');
