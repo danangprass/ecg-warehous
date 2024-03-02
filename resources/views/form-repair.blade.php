@@ -38,6 +38,8 @@
                                             value="{{ $item->id }}">
                                         <input type="hidden" name="product[{{ $item->id }}][available_amount]"
                                             value="{{ $item->mine->amount ?? 0 }}">
+                                        <input type="hidden" name="product[{{ $item->id }}][price]"
+                                            value="{{ $item->price ?? 0 }}">
                                     </div>
                                     <div class="">
                                         <x-form.input id="amount" class="block w-full" type="number"
@@ -59,6 +61,8 @@
                                             value="{{ $item->id }}">
                                         <input type="hidden" name="product[{{ $item->id }}][available_amount]"
                                             value="{{ $item->mine->amount ?? 0 }}">
+                                        <input type="hidden" name="product[{{ $item->id }}][price]"
+                                            value="{{ $item->price ?? 0 }}">
                                     </div>
 
                                     <div class="">
@@ -82,6 +86,8 @@
                                             value="{{ $item->id }}">
                                         <input type="hidden" name="product[{{ $item->id }}][available_amount]"
                                             value="{{ $item->mine->amount ?? 0 }}">
+                                        <input type="hidden" name="product[{{ $item->id }}][price]"
+                                            value="{{ $item->price ?? 0 }}">
                                     </div>
                                     <div class="">
                                         <x-form.input id="amount" class="block w-full" type="number"

@@ -102,7 +102,7 @@ class TransactionController extends Controller
         $products = Product::orderBy('id')->get();
         return view('form-add-stock-warehouse', compact('products'));
     }
-    
+
     public function formEditStockWarehouse()
     {
         $products = Product::orderBy('id')->get();
@@ -117,25 +117,34 @@ class TransactionController extends Controller
             'owner_id' => Auth::user()->id,
             'product_link_id' => $productLink->id,
             'type' => 'modif',
+            'modif' => $productLink->amount,
+            'repair' => 0,
+            'fee' => $productLink->amount * 0.086,
+            'reimburse' => $productLink->amount * 0.06,
         ]);
         return redirect()->route('form-modif')->with(['success' => "Link saved"]);
     }
     public function storeFormRepait(FormRepair $request)
     {
         DB::transaction(function () use ($request) {
-
             $transactionDetails = collect($request->product)->map(function ($item) use ($request) {
                 return [
                     'product_id' => $item['id'],
                     'link' => $request->link,
                     'amount' => $item['amount'] ?? 0,
+                    'price' => $item['price'],
+                    'total' => ($item['amount']  * $item['price']) ?? 0,
                 ];
             })->filter(fn ($item) => $item['amount'] > 0)->toArray();
-
+            // dd($transactionDetails, array_sum(array_column($transactionDetails, 'total')));
             Transaction::create([
                 'date' => Carbon::now()->format('Y-m-d'),
                 'owner_id' => Auth::user()->id,
                 'type' => 'repair',
+                'modif' => 0,
+                'repair' => 0,
+                'fee' => array_sum(array_column($transactionDetails, 'total')) ?? 0,
+                'reimburse' => 0,
             ])->details()->createMany($transactionDetails);
             foreach ($transactionDetails as $detail) {
                 Auth::user()->pivot()->where('product_id', $detail['product_id'])->decrement('amount', $detail['amount']);
@@ -154,6 +163,7 @@ class TransactionController extends Controller
                 'owner_id' => $user->id,
                 'type' => 'reimburse',
                 'reimbursement' => $amount * -1,
+                'reimburse' => $amount * -1,
             ]);
         });
         return redirect()->route('employee-list')->with(['success' => "Reimbursement Success"]);
@@ -167,6 +177,7 @@ class TransactionController extends Controller
                 'owner_id' => $user->id,
                 'type' => 'bonus',
                 'bonus' => $amount * -1,
+                'fee' => $amount * -1,
             ]);
         });
         return redirect()->route('employee-list')->with(['success' => "Bonus Payment Success"]);

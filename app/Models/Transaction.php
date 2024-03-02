@@ -20,6 +20,10 @@ class Transaction extends Model
         "product_link_id",
         'bonus',
         'reimbursement',
+        'modif',
+        'repair',
+        'fee',
+        'reimburse',
     ];
 
     public function details(): HasMany
@@ -39,30 +43,30 @@ class Transaction extends Model
     /**
      * Get the user's first name.
      */
-    protected function fee(): Attribute
-    {
-        return Attribute::make(
-            get: fn () =>
-            match ($this->type) {
-                'repair' => round($this->details->sum('total') +  $this->bonus),
-                'modif' => round(($this->link->amount * 0.086) + $this->bonus),
-                default => $this->bonus,
-            }
-        );
-    }
+    // protected function fee(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn () =>
+    //         match ($this->type) {
+    //             'repair' => round($this->details->sum('total') +  $this->bonus),
+    //             'modif' => round(($this->link->amount * 0.086) + $this->bonus),
+    //             default => $this->bonus,
+    //         }
+    //     );
+    // }
 
-    /**
-     * Get the user's first name.
-     */
-    protected function reimburse(): Attribute
-    {
-        return Attribute::make(
-            get: fn () =>
-            match ($this->type) {
-                'modif' =>  round(($this->link->amount * 0.86) + ($this->reimbursement ?? 0)),
-                default => ($this->reimbursement ?? 0),
-            }
-        );
-    }
+    // /**
+    //  * Get the user's first name.
+    //  */
+    // protected function reimburse(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn () =>
+    //         match ($this->type) {
+    //             'modif' =>  round(($this->link->amount * 0.86) + ($this->reimbursement ?? 0)),
+    //             default => ($this->reimbursement ?? 0),
+    //         }
+    //     );
+    // }
 
 }

@@ -86,6 +86,7 @@
         </thead>
         <tbody>
             @forelse ($data as $item)
+                {{-- @dd($item) --}}
                 <tr>
                     <td class="text-center border border-yellow-500 px-1 py-3 capitalize w-56">
                         {{ $item->name }}
@@ -100,6 +101,14 @@
                         {{ $item->bank_account }}
                     </td>
                     <td class="text-center border border-yellow-500 px-1 py-3">
+                        {{-- <p>{{ ceil($item->reimburse > 0 ? $item->reimburse : 0) }}</p>
+                        @if ($item->reimburse > 0)
+                            <x-button
+                                href="{{ route('employee-list-reimburse', ['user' => $item->id, 'amount' => $item->transactions->sum('reimburse')]) }}"
+                                variant="purple" class="justify-center max-w-xs gap-2 my-2 text-sm">
+                                <span>Reimburse</span>
+                            </x-button>
+                        @endif --}}
                         <p>{{ $item->transactions->sum('reimburse') }}</p>
                         @if ($item->transactions->sum('reimburse') > 0)
                             <x-button
@@ -110,6 +119,14 @@
                         @endif
                     </td>
                     <td class="text-center border border-yellow-500 px-1 py-3">
+                        {{-- <p>{{ ceil($item->fee > 0 ? $item->fee : 0) }}</p>
+                        @if ($item->fee > 0)
+                            <x-button
+                                href="{{ route('employee-list-bonus', ['user' => $item->id, 'amount' => $item->transactions->sum('fee')]) }}"
+                                variant="purple" class="justify-center max-w-xs gap-2 my-2 text-sm">
+                                <span>Bonus</span>
+                            </x-button>
+                        @endif --}}
                         <p>{{ $item->transactions->sum('fee') }}</p>
                         @if ($item->transactions->sum('fee') > 0)
                             <x-button

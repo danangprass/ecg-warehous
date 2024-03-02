@@ -16,6 +16,8 @@ class TransactionDetail extends Model
         'product_id',
         'link',
         'amount',
+        'price',
+        'total',
     ];
 
     public function product(): BelongsTo
